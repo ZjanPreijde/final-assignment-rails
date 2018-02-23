@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BurningMatch</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+    <%= render "shared/navbar" %>
+
+    <div class="container">
+      <header class="footer">
+        <p>BurningMatch, Patent pending, LilZ Ltc, Cayman Islands</p>
+      </header>
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <%= yield %>
+
+      <footer class="footer">
+        <p>&copy; 2018 Burning Match, Inc.</p>
+      </footer>
+    </div>
+
+  </body>
+</html>

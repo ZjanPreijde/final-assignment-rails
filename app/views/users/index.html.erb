@@ -1,0 +1,26 @@
+
+  <div class="header clearfix">
+
+    <div class="jumbotron text-center">
+      <h1>Overview users</h1>
+    </div>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% admin_count = User.where(admin: true).count %>
+      <% User.all.order("email").each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
