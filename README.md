@@ -1,5 +1,9 @@
 # Student Evaluations
 
+Starting over, from React/Redux back to Ruby on Rails
+
+
+
 Select all students for Batch
 
 ```ruby
@@ -11,6 +15,12 @@ batch_id = 1
 
 
 
+
+
+<u>Other Tidbits</u>
+
+
+
 Also rather handy :
 
 ```shell
@@ -18,8 +28,6 @@ $ git remote -v
 ```
 
 
-
-Other Tidbits
 
 Under the hood with Devise:
 

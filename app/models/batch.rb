@@ -1,41 +1,22 @@
-class Match < ApplicationRecord
-  # Connect student id's to User class
-  belongs_to :student1, :class_name => "User"
-  belongs_to :student2, :class_name => "User"
+class Batch < ApplicationRecord
+  has_many :students
 
-  def create_new_matches(date)
-    create_matches(date)
+  def create_new_batch(name, start_date, end_date)
+    batch = Batch.new(name: name, start_date: start_date, end_date: end_date)
+    batch.save
   end
 
-  def unmatch_matches(date)
-    destroy_matches(date)
+  def get_batch(name)
+    Batch.where(name: name)
   end
 
-  def get_matches(date)
-    Match.where(date: date)
+  def get_students(batch_id, order = "")
+    Student.where(batch_id: batch_id).order(order)
   end
 
-  def get_match_stats(format = "html")
-    compile_match_stats(format)
-  end
-
-  def get_students(order = "")
-    User.where(admin: false).order(order).ids
-  end
-
-  def get_user_names
-    # Store user names in hash to reduce database queries
-    names = {}
-    User.all.each do | user |
-      names[user.id] = user.name
-    end
-    return names
-  end
-
-  def show_matched_students(date)
-    user_names  = get_user_names
-    students    = get_students()
-    show_matched = ""
+  def show_evaluations(batch_id)
+    students = get_students(batch_id)
+    evaluations
 
     matches = get_matches(date)
     matches.each do |match|

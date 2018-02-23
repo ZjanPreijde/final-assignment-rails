@@ -10,19 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129214414) do
+ActiveRecord::Schema.define(version: 20180223112830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "matches", force: :cascade do |t|
-    t.datetime "date"
-    t.bigint "student1_id"
-    t.bigint "student2_id"
+  create_table "batches", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["student1_id"], name: "index_matches_on_student1_id"
-    t.index ["student2_id"], name: "index_matches_on_student2_id"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string "score"
+    t.string "remarks"
+    t.bigint "batch_id"
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.index ["batch_id"], name: "index_evaluations_on_batch_id"
+    t.index ["student_id"], name: "index_evaluations_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "last_score"
+    t.bigint "batch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_students_on_batch_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,9 +57,12 @@ ActiveRecord::Schema.define(version: 20180129214414) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "evaluations", "batches"
+  add_foreign_key "evaluations", "students"
+  add_foreign_key "students", "batches"
 end

@@ -2,35 +2,21 @@
       <div class="jumbotron text-center">
         <% if user_signed_in? %>
         <h1>Hi <%= current_user.name %></h1>
-        <p>Welcome to Burning Match</p>
+        <p>Welcome to Student Evaluations</p>
         <% else %>
-        <h1>Welcome to Burning Match</h1>
+        <h1>Welcome to Student Evaluations</h1>
         <% end %>
       </div>
 
       <div class="row marketing">
 
-        <div class="col-lg-6">
+        <div class="col-lg-12">
         <% if !user_signed_in? %>
-          <p class="lead">As an Admin, would you like to match your students?</p>
-          <p class="lead">Or as a Student see who you are matched with?</p>
+          <p class="lead">Want to evaluate your students?</p>
           <p> <%= link_to "Sign in", new_user_session_path, class: "btn btn-lg btn-success" %></p>
-        <% elsif current_user.admin %>
-          <p class="lead">Would you like to match your students?</p>
-          <p> <%= link_to "Show Student Matches", matches_path, class: "btn btn-lg btn-success" %><p>
         <% else %>
-          <p class="lead">Would you like to see your matches?</p>
-          <p><%= link_to "Show My Matches", mymatches_path, class: "btn btn-lg btn-success" %></p>
-        <% end %>
-        </div>
-
-        <div class="col-lg-6">
-        <% if !user_signed_in? %>
-          <p class="lead">Not registered yet?</p>
-          <p> <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-success" %></p>
-        <% elsif current_user.admin %>
-          <p class="lead">Would you like see the registered users?</p>
-          <p><%= link_to "Show Overview Users", users_path, class: "btn btn-lg btn-success" %></p>
+          <p class="lead">Go to Classes</p>
+          <p> <%= link_to "Classes", batches_path, class: "btn btn-lg btn-success" %><p>
         <% end %>
         </div>
 

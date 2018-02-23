@@ -5,11 +5,11 @@ class BatchesController < ApplicationController
 
   end
 
-  def batch_stats
-
+  def new_batch
+    redirect_to batches_path, :notice => "Yes, wouldn't you like to be able to do that?"
   end
 
-  def make_batch
+  def create_batch
     name_par       = params[:name]
     start_date_par = params[:start_date]
     end_date_par   = params[:end_date]
@@ -33,7 +33,7 @@ class BatchesController < ApplicationController
     else
       batch = Batch.new
       batch.create_new_batch(name, start_date, end_date)
-      redirect_to batches_path, :notice => "Batch " + name " created"
+      redirect_to batches_path, :notice => "Batch " + name + " created"
     end
   end
 

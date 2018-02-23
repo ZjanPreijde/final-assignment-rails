@@ -1,0 +1,40 @@
+
+  <div class="header clearfix">
+
+    <div class="jumbotron text-center">
+      <h1>Students class <%= @batch.name %></h1>
+    </div>
+
+    <table class="table" style="width:100%;">
+      <thead>
+        <tr>
+          <td style="width:20%;">Name</td>
+          <td style="width:20%;"></td>
+          <td style="width:20%;"></td>
+          <td style="width:40%;"></td>
+        <tr>
+      </thead>
+      <tbody>
+
+      <% @students.each do |student| %>
+        <% evaluation_count = Evaluation.where(student_id: student.id).count() %>
+        <tr>
+          <td>
+            <%= student.name %></a>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+
+          <td>
+            <%= evaluation_count %> Evaluations
+          </td>
+
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <a href="/new_student?batch_id=<%= @batch.id %>" class="btn btn-success">Add a Student to Class</a>
+
+  </div>   <!-- class="header clearfix" -->

@@ -13,8 +13,7 @@
         </tr>
       </thead>
       <tbody>
-      <% admin_count = User.where(admin: true).count %>
-      <% User.all.order("email").each do |user| %>
+      <% User.all.order("name").each do |user| %>
         <tr>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
