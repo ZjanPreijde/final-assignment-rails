@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @batch = Batch.find(params[:batch_id])
+    @batch = Batch.find(params[:id])
     @students = Student.where(batch_id: @batch.id).order("name")
   end
 
@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @batch   = Batch.find(params[:batch_id])
+    @batch   = Batch.find(params[:id])
     @student = Student.new( student_params )
     if @student.save
       redirect_to @student, :notice => "Student #{@student.name} added"

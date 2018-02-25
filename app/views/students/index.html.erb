@@ -3,10 +3,12 @@
 
     <div class="jumbotron text-center">
       <h1><span class="grey">Students of Class</span> <em><%= @batch.name %></em></h1>
-      <p>views/students/index.html.erb</p>
     </div>
     <%= link_to "Back to Classes", batches_path, :class => "btn btn-default" %>
-    <%= link_to "Add a student", new_batch_student_path(@batch), :class => "btn btn-success pull-right" %>
+    <%= link_to "Add a student",
+      new_student_path( :batch_id => @batch.id ),
+      batch_id: @batch.id.to_s,
+      :class => "btn btn-success pull-right" %>
     <% if @students.length == 0 %>
     <%= link_to "Remove Class", batch_path(@batch),
         method: :delete,
@@ -24,32 +26,6 @@
       <div class="col-md-3 text-center">
         <h2><%= student.name %></h2>
         <img src="<%= student.image_url%>" class="student-image center-block img-rounded">
-        <h3><%= evaluation_count %> Evaluations</h3>
-      </div>
-
-      <% cols += 1 %>
-      <% if cols%4 == 0 %>
-    </div>  <!-- class="row" -->
-    <div class="row">
-      <% end %>
-    <% end %>
-
-    </div>  <!-- class="row" -->
-  </div>   <!-- class="header clearfix" -->
-
-  <div class="header clearfix">
-
-    <div class="jumbotron text-center">
-      <h1>Students class <%= @batch.name %></h1>
-    </div>
-    <a href="/new_student?batch_id=<%= @batch.id %>" class="btn btn-success">Add a Student to Class</a>
-    <% cols = 0 %>
-    <div class="row">
-    <% @students.each do |student| %>
-        <% evaluation_count = Evaluation.where(student_id: student.id).count() %>
-      <div class="col-md-3">
-        <h2><%= student.name %></h2>
-        <img src="<%= student.image_url%>" class="img-responsive center-block img-rounded">
         <h3><%= evaluation_count %> Evaluations</h3>
       </div>
 

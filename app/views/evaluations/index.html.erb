@@ -1,0 +1,16 @@
+  <div class="header clearfix">
+    <div class="jumbotron text-center">
+      <h1><span class="grey">Evaluations of </span> <em><%= @student.name %></em></h1>
+    </div>
+    <%= link_to "Back to Students", batch_path(@batch), :class => "btn btn-default" %>
+    <%= link_to "Add an evaluation", new_evaluation_path(@student), :class => "btn btn-success pull-right" %>
+    <%= link_to "Remove Student", student_path(@student),
+        method: :delete,
+        data: { confirm: "Remove Student?" },
+        :class => "btn btn-warning pull-right" %>
+    <% if @evaluations.length == 0 %>
+    <div class="row">
+      <h2>This Student has no Evaluations yet</h2>
+    </div>
+    <% end %>
+  </div>   <!-- class="header clearfix" -->
