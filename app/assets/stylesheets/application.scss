@@ -23,10 +23,10 @@
 .navbar {
   margin-bottom: 0;
 }
-.student-form {
+.batch-form, .student-form, .evaluation-form {
   border-collapse:collapse;
 }
-.student-form td {
+.batch-form td, .student-form td, .evaluation-form td  {
   padding-top: 10px;
 }
 .grey {
@@ -40,4 +40,13 @@
 }
 .green {
   color: green;
+}
+.bg-red {
+  background-color: red;
+}
+.bg-yellow {
+  background-color: yellow;
+}
+.bg-green {
+  background-color: green;
 }

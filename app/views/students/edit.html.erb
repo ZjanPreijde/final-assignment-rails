@@ -1,3 +1,7 @@
-<h1>Edit Student</h1>
+<% if @batch.nil? %>
+  <% @batch = Batch.find(params[:batch_id]) %>
+<% end %>
+
+<h1>Edit Student for Class <%= @batch.name %></h1>
 
 <%= render 'form' %>

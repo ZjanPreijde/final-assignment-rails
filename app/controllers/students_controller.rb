@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(params[:id])
+    # Done in evaluations#index
   end
 
   def new
@@ -22,7 +22,7 @@ class StudentsController < ApplicationController
 
   def create
     @student       = Student.new( student_params )
-    @student.batch = Batch.find(params[:id])
+    @student.batch = Batch.find(params[:batch_id])
     if @student.save
       redirect_to batch_path(@student.batch.id), :notice => "Student #{@student.name} added"
     else

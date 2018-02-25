@@ -18,6 +18,9 @@
       <h2>This class has no students yet</h2>
     </div>
     <% else %>
+    <div class="row">
+      <h2>This class has <%= @students.length %> students</h2>
+    </div>
     <% end %>
     <% cols = 0 %>
     <div class="row">

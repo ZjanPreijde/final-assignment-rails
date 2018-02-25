@@ -19,7 +19,7 @@ s_14_2 = Student.create!(name:"Zjan",
   image_url:"https://stadclickt.nl/wp-content/uploads/2017/07/The-Student-Hotel-Groningen-10.jpg",
   batch_id:batch_14.id)
 s_14_3 = Student.create!(name:"Irina",
-  image_url:"https://www.loveme.com/images/p120484-1.jpg",
+  image_url:"https://i2.wp.com/www.celebsurgeries.com/wp-content/uploads/2014/05/Julianne-Hough-1.jpg",
   batch_id:batch_14.id)
 s_14_4 = Student.create!(name:"Renato",
   image_url:"http://publish.illinois.edu/ae-lambros/files/2017/10/renato.jpg",

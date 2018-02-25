@@ -1,0 +1,8 @@
+<% if @student.nil? %>
+  <% @student = Student.find(params[:student_id]) %>
+  <% @batch   = @student.batch %>
+<% end %>
+
+<h1>New Evaluation for <%= @student.name %></h1>
+
+<%= render 'form' %>

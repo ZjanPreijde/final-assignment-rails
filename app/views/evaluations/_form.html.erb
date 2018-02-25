@@ -1,0 +1,44 @@
+Batch <%= @batch.name%> is from <%= @batch.start_date.strftime("%d-%m-%Y") %>
+ to <%= @batch.end_date.strftime("%d-%m-%Y") %>
+<%= form_with model: @evaluation, local: true do |f| %>
+  <% if @evaluation.errors.any? %>
+  <div id="error_explanation">
+    <% @evaluation.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+  <% end %>
+  <table class="evaluation-form">
+    <tbody>
+      <tr>
+        <td><%= f.label :date %></td>
+        <td>&nbsp:&nbsp</td>
+        <td><%= f.date_field :date, :disabled => @evaluation.persisted? %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label :score %></td>
+        <td>&nbsp:&nbsp</td>
+        <td><%= f.text_field :score %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :remarks %></td>
+        <td>&nbsp:&nbsp</td>
+        <td><%= f.text_area :remarks %></td>
+      </tr>
+
+      <tr>
+        <td></td><td></td>
+        <td>
+          <%= f.submit @evaluation.persisted? ? "Update Evaluation" : "Add Evaluation",
+              :class => "btn btn-success" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="hidden" id="batch_id" name="batch_id" value="<%= @batch.id %>">
+  <input type="hidden" id="student_id" name="student_id" value="<%= @student.id %>">
+<% end %>
+<p style="padding-top:30px;">
+<%= link_to "Back to Student " + @student.name, student_path(@student), :class => "btn btn-default" %>
+</p>

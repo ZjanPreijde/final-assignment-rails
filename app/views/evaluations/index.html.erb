@@ -1,16 +1,56 @@
   <div class="header clearfix">
     <div class="jumbotron text-center">
-      <h1><span class="grey">Evaluations of </span> <em><%= @student.name %></em></h1>
+      <h1>
+        <span class="grey">Evaluations of </span>
+        <em><%= @student.name %>
+          <span style="font-size:30px;"> (<%= @batch.name %>)</span>
+        </em>
+      </h1>
     </div>
-    <%= link_to "Back to Students", batch_path(@batch), :class => "btn btn-default" %>
-    <%= link_to "Add an evaluation", new_evaluation_path(@student), :class => "btn btn-success pull-right" %>
-    <%= link_to "Remove Student", student_path(@student),
-        method: :delete,
-        data: { confirm: "Remove Student?" },
-        :class => "btn btn-warning pull-right" %>
-    <% if @evaluations.length == 0 %>
+    <div class="row" style="padding-bottom:20px;">
+      <%= link_to "Back to Students",
+          batch_path(@batch),
+          :class => "btn btn-default" %>
+      <%= link_to "Add an evaluation",
+          new_evaluation_path( :student_id => @student.id ),
+          :class => "btn btn-success pull-right" %>
+    </div>
+    <div class="row" style="padding-bottom:20px;">
+      <div class="col-md-3">
+        <img src="<%= @student.image_url%>" class="student-image center-block img-rounded">
+      </div>
+      <div class="col-md-9">
+        <p>Student statistics :</p>
+        <p><%= @evaluations.length %> Evaluations</p>
+        <% if @evaluations.length > 0 %>
+        <p class="bg-green"  style="padding:5px;">33.3% Green</p>
+        <p class="bg-yellow" style="padding:5px;">33.3% Yellow</p>
+        <p class="bg-red"    style="padding:5px;">33.3% Red</p>
+        <% end %>
+      </div>
+    </div>
+
+    <% cols = 0 %>
     <div class="row">
-      <h2>This Student has no Evaluations yet</h2>
-    </div>
+    <% @evaluations.each do |evaluation| %>
+      <div class="col-md-2 bg-<%= evaluation.score %>" style="padding:5px;margin:2px 0;border-radius:15px;">
+        <p>Date : <%= evaluation.date.strftime("%d-%m-%Y") %></p>
+        <p>Remarks : <%= evaluation.remarks %></p>
+        <%= link_to "Edit", edit_evaluation_path(evaluation),
+            :class => "pull-left btn btn-sm btn-primary" %>
+        <%= link_to "Remove", evaluation_path(evaluation),
+            method: :delete,
+            data: { confirm: "Remove Evaluation?" },
+            :class => "pull-right btn btn-sm btn-warning" %>
+      </div>
+
+      <% cols += 1 %>
+      <% if cols%6 == 0 %>
+    </div>  <!-- class="row" -->
+    <div class="row">
+      <% end %>
     <% end %>
+
+    </div>  <!-- class="row" -->
+
   </div>   <!-- class="header clearfix" -->
