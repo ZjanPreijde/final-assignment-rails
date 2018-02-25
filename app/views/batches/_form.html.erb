@@ -1,3 +1,4 @@
+
 <%= form_with model: @batch, local: true do |f| %>
 <% if @batch.errors.any? %>
   <div id="error_explanation">
@@ -6,23 +7,23 @@
     <% end %>
   </div>
 <% end %>
-
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :start_date %><br>
-    <%= f.date_field :start_date %>
-  </p>
-
-  <p>
-    <%= f.label :end_date %><br>
-    <%= f.date_field :end_date %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
+  <table class="student-form">
+    <tr>
+      <td><%= f.label :name       %></td><td> :&nbsp</td><td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :start_date %></td><td> :&nbsp</td><td><%= f.date_field :start_date %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :end_date   %></td><td> :&nbsp</td><td><%= f.date_field :end_date %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= f.submit "Create Class", :class => "btn btn-success" %></td>
+    </tr>
+  </table>
 <% end %>
+<p style="padding-top:30px;">
+<%= link_to "Back to Classes", batches_path, :class => "btn btn-default" %>
+</p>

@@ -12,16 +12,16 @@ class StudentsController < ApplicationController
 
   def new
     @batch   = Batch.find(params[:batch_id])
-    @student = Student.new(batch_id: @batch.id)
-    @fuck_all = "Fuck all"
+    @student = Student.new(batch: @batch)
   end
 
   def create
+    @batch   = Batch.find(params[:batch_id])
     @student = Student.new( student_params )
     if @student.save
-      redirect_to @student
+      redirect_to @student, :notice => "Student #{@student.name} added"
     else
-      render 'new', :notice => "Student #{@student.name} added"
+      render 'new'
     end
   end
 
@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
 
 private
   def student_params
-    params.require(:student).permit(:name, :image_url)
+    params.require(:student).permit(:batch_id, :name, :image_url)
   end
 
 end

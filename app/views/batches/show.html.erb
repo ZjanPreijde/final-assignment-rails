@@ -4,12 +4,17 @@
     <div class="jumbotron text-center">
       <h1><span class="grey">Students of Class</span> <em><%= @batch.name %></em></h1>
     </div>
-    <%= link_to "Add a student", new_batch_student_path(@batch), :class => "btn btn-success" %>
+    <%= link_to "Back to Classes", batches_path, :class => "btn btn-default" %>
+    <!-- < %= link_to "Add a student", new_student_path(@batch), :class => "btn btn-success pull-right" %> -->
     <% if @students.length == 0 %>
     <%= link_to "Remove Class", batch_path(@batch),
         method: :delete,
         data: { confirm: "Remove empty Class?" },
-        :class => "btn btn-warning" %>
+        :class => "btn btn-warning pull-right" %>
+    <div class="row">
+      <h2>This class has no students yet</h2>
+    </div>
+    <% else %>
     <% end %>
     <% cols = 0 %>
     <div class="row">

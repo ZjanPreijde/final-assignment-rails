@@ -1,4 +1,4 @@
-<%= form_with model: @student, local: true do |f| %>
+<%= form_with model: [@batch, @student], local: true do |f| %>
 <% if @student.errors.any? %>
   <div id="error_explanation">
     <% @student.errors.full_messages.each do |msg| %>
@@ -6,18 +6,22 @@
     <% end %>
   </div>
 <% end %>
+  <table class="student-form">
+    <tbody>
+      <tr>
+        <td><%= f.label :name %></td><td>&nbsp:&nbsp</td><td><%= f.text_field :name %></td>
+      </tr>
 
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+      <tr>
+        <td><%= f.label "Picture" %></td><td>&nbsp:&nbsp</td><td><%= f.url_field :image_url %></td>
+      </tr>
 
-  <p>
-    <%= f.label :image_url %><br>
-    <%= f.url_field :image_url %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
+      <tr>
+        <td></td><td></td><td><%= f.submit "Add Student", :class => "btn btn-success" %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
+<p style="padding-top:30px;">
+<%= link_to "Back to Class "+ @batch.name, batch_path(@batch), :class => "btn btn-default" %>
+</p>

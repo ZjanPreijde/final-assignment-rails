@@ -17,12 +17,13 @@ class BatchesController < ApplicationController
   def create
     @batch = Batch.new( batch_params )
     if @batch.save
-      redirect_to @batch
+      redirect_to batches_path(@batch), :notice => "Class #{@batch.name} created"
     else
-      render 'new', :notice => "Class #{@batch.name} created"
+      render 'new'
     end
   end
 
+  # Not done in this app
   def update
     @batch = Batch.find(params[:id])
     if @batch.update( batch_params )

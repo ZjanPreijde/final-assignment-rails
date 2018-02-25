@@ -42,32 +42,45 @@ scores = ["green", "yellow", "red"]
 
 puts "Creating Evaluations " + batch_14.name + " ... "
 batch_id = batch_14.id
-xdate    = batch_14.start_date.to_date
+# xdate    = batch_14.start_date.to_date
+xdate    = Date.today - 15
 while xdate < Date.today do
-  print xdate, "-"
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_14_1.id)
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_14_2.id)
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_14_3.id)
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_14_4.id)
+  if !xdate.sunday? && !xdate.saturday?
+    print xdate, "-"
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_14_1.id)
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_14_2.id)
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_14_3.id)
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_14_4.id)
+  end
   xdate = xdate + 1
 end
 
 puts " "
 puts "Creating Evaluations " + batch_15.name + " ... "
 batch_id = batch_15.id
-xdate    = batch_15.start_date.to_date
+# xdate    = batch_15.start_date.to_date
+xdate    = Date.today - 15
 while xdate < Date.today do
-  print xdate, "-"
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_15_1.id)
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_15_2.id)
-  Evaluation.create!(date: xdate, score: "yellow", remarks: "remark",
-    batch_id: batch_id, student_id:s_15_3.id)
+  if !xdate.sunday? && !xdate.saturday?
+    print xdate, "-"
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_15_1.id)
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_15_2.id)
+    Evaluation.create!(date: xdate,
+      score: scores[rand(0..scores.length-1)], remarks: "remark",
+      batch_id: batch_id, student_id:s_15_3.id)
+  end
   xdate = xdate + 1
 end
 
