@@ -3,22 +3,27 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get "batches"   => "batches#index"
-  get "new_batch" => "batches#new_batch"
-  get "create_batch" => "batches#create_batch"
-  # get "batch_stats" => "batches#match_stats"
+  resources :batches do
+    resources :students do
+      resources :evaluations
+    end
+  end
 
-  get "students"  => "students#index"
-  get "new_student" => "students#new_student"
-  get "create_student" => "students#create_student"
-  get "edit_student" => "students#edit_student"
-  get "update_student" => "students#update_student"
-  get "delete_student" => "students#delete_student"
-
-  get "create_evaluation" => "students#create_evaluation"
-  get "update_evaluation" => "students#update_evaluation"
-
-  # get "users" => "users#index"
-  # get "toggle_admin" => "users#toggle_admin"
+  # get "batches"   => "batches#index"
+  # get "new_batch" => "batches#new_batch"
+  # post "batches" => "batches#create_batch"
+  #
+  # get "students"        => "students#index"
+  # get "students/:id"    => "students#show"
+  # get "new_student"     => "students#new_student"
+  # get "edit_student"    => "students#edit_student"
+  # post "students"       => "students#create_student"
+  # patch "students/:id"  => "students#update_student"
+  # delete "students/:id" => "students#delete_student"
+  #
+  # get "evaluations"     => "students#create_evaluation"
+  # get "evaluations/:id" => "students#create_evaluation"
+  # post "evaluations/:id" => "students#create_evaluation"
+  # patch "evaluations/:id" => "students#update_evaluation"
 
 end

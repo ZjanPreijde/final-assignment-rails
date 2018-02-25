@@ -12,15 +12,29 @@ batch_14 = Batch.create!(name:"CA#14", start_date:Date.new(2018,1,8), end_date:D
 batch_15 = Batch.create!(name:"CA#15", start_date:Date.new(2018,2,12), end_date:Date.new(2018,4,13))
 
 puts "Creating students batch 14"
-s_14_1 = Student.create!(name:"Oscar", batch_id:batch_14.id)
-s_14_2 = Student.create!(name:"Zjan", batch_id:batch_14.id)
-s_14_3 = Student.create!(name:"Irina", batch_id:batch_14.id)
-s_14_4 = Student.create!(name:"Renato", batch_id:batch_14.id)
+s_14_1 = Student.create!(name:"Oscar",
+  image_url:"http://content.presspage.com/uploads/1369/1920_orlando.jpg",
+  batch_id:batch_14.id)
+s_14_2 = Student.create!(name:"Zjan",
+  image_url:"https://stadclickt.nl/wp-content/uploads/2017/07/The-Student-Hotel-Groningen-10.jpg",
+  batch_id:batch_14.id)
+s_14_3 = Student.create!(name:"Irina",
+  image_url:"https://www.loveme.com/images/p120484-1.jpg",
+  batch_id:batch_14.id)
+s_14_4 = Student.create!(name:"Renato",
+  image_url:"http://publish.illinois.edu/ae-lambros/files/2017/10/renato.jpg",
+  batch_id:batch_14.id)
 
 puts "Creating students batch 15"
-s_15_1 = Student.create!(name:"Rishi", batch_id:batch_15.id)
-s_15_2 = Student.create!(name:"Lilian", batch_id:batch_15.id)
-s_15_3 = Student.create!(name:"Danijel", batch_id:batch_15.id)
+s_15_1 = Student.create!(name:"Rishi",
+  image_url:"https://cdn.shopify.com/s/files/1/1637/3773/products/Rishi_Sharma_1024x1024.JPG",
+  batch_id:batch_15.id)
+s_15_2 = Student.create!(name:"Lillian",
+  image_url:"http://www.taiwaneseamerican.org/100people/wp-content/uploads/2011/02/cheng.lillian2.jpg",
+  batch_id:batch_15.id)
+s_15_3 = Student.create!(name:"Danijel",
+  image_url:"https://danijelzekanovic.files.wordpress.com/2015/05/mr-me.jpg",
+  batch_id:batch_15.id)
 
 
 # Create evaluations

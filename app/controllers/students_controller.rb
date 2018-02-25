@@ -2,39 +2,47 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    batch_id = params[:batch_id].to_i
-    @batch = Batch.find(batch_id)
-    @students = Student.where(batch_id: batch_id).order("name")
+    @batch = Batch.find(params[:batch_id])
+    @students = Student.where(batch_id: @batch.id).order("name")
   end
 
-  def new_student
-    batch_id = params[:batch_id].to_i
-    redirect_to students_path, batch_id: batch_id, :notice => "Yes, wouldn't you like to be able to do that?"
+  def show
+    @student = Student.find(params[:student_id])
   end
 
+  def new
+    @batch   = Batch.find(params[:batch_id])
+    @student = Student.new(batch_id: @batch.id)
+    @fuck_all = "Fuck all"
+  end
 
-  def create_student
-    batch_id = params[:batch_id].to_i
-    name     = params[:name]
-    if !check_name(name)
-      redirect_to students_path, :alert => "Invalid name"
+  def create
+    @student = Student.new( student_params )
+    if @student.save
+      redirect_to @student
     else
-      student = Student.new(name: name, batch_id: batch_id)
-      student.save
-      redirect_to students_path, batch_id: batch_id, :notice => "Student " + name + " created"
+      render 'new', :notice => "Student #{@student.name} added"
     end
   end
 
-  def check_name(name)
-    # TODO: Check whether name is unique for batch
-    return !name.blank?
+  def update
+    @student = Student.find(params[:id])
+    if @student.update( batch_params )
+      redirect_to @student
+    else
+      render 'edit'
+    end
   end
 
-  def create_evaluation
-
+  def destroy
+    @student = Student.find(params[:id])
+    @student.destroy
+    redirect_to batch_student_path
   end
-  def update_evaluation
 
+private
+  def student_params
+    params.require(:student).permit(:name, :image_url)
   end
 
 end

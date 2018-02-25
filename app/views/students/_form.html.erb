@@ -1,0 +1,23 @@
+<%= form_with model: @student, local: true do |f| %>
+<% if @student.errors.any? %>
+  <div id="error_explanation">
+    <% @student.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :image_url %><br>
+    <%= f.url_field :image_url %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
