@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(params[:student_id])
+    @student = Student.find(params[:id])
   end
 
   def new
@@ -15,11 +15,16 @@ class StudentsController < ApplicationController
     @student = Student.new(batch: @batch)
   end
 
+  def edit
+    @student = Student.find(params[:id])
+    @batch   = @student.batch
+  end
+
   def create
-    @batch   = Batch.find(params[:id])
-    @student = Student.new( student_params )
+    @student       = Student.new( student_params )
+    @student.batch = Batch.find(params[:id])
     if @student.save
-      redirect_to @student, :notice => "Student #{@student.name} added"
+      redirect_to batch_path(@student.batch.id), :notice => "Student #{@student.name} added"
     else
       render 'new'
     end
@@ -27,8 +32,8 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
-    if @student.update( batch_params )
-      redirect_to @student
+    if @student.update( student_params )
+      redirect_to batch_path(@student.batch.id), :notice => "Student #{@student.name} updated"
     else
       render 'edit'
     end
@@ -36,8 +41,9 @@ class StudentsController < ApplicationController
 
   def destroy
     @student = Student.find(params[:id])
+    batch_id = @student.batch.id
     @student.destroy
-    redirect_to batch_student_path
+    redirect_to batch_path(batch_id)
   end
 
 private

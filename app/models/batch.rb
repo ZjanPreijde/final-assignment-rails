@@ -10,12 +10,4 @@ class Batch < ApplicationRecord
     end
   end
 
-  def get_batch(name)
-    Batch.where(name: name)
-  end
-
-  def get_students(batch_id, order = "")
-    Student.where(batch_id: batch_id).order(order)
-  end
-
 end

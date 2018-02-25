@@ -26,7 +26,16 @@
       <div class="col-md-3 text-center">
         <h2><%= student.name %></h2>
         <img src="<%= student.image_url%>" class="student-image center-block img-rounded">
-        <h3><%= evaluation_count %> Evaluations</h3>
+        <h3><%= link_to evaluation_count.to_s + " Evaluations",
+            student_path(student),
+            :class => "btn btn-primary btn-block" %>
+        </h3>
+        <%= link_to "Edit", edit_student_path(student),
+            :class => "btn btn-default pull-left" %>
+        <%= link_to "Remove", student_path(student),
+            method: :delete,
+            data: { confirm: "Remove Student " + student.name + "?" },
+            :class => "btn btn-warning pull-right" %>
       </div>
 
       <% cols += 1 %>
