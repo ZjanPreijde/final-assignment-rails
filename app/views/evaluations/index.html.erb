@@ -15,6 +15,22 @@
           new_evaluation_path( :student_id => @student.id ),
           :class => "btn btn-success pull-right" %>
     </div>
+
+    <!-- All this should be moved to model -->
+    <% evaluation_grouped = Evaluation.where(student_id: @student.id).group(:score).count %>
+    <%= evaluation_grouped["green"]  = 0 if evaluation_grouped["green"].nil?  %>
+    <%= evaluation_grouped["yellow"] = 0 if evaluation_grouped["yellow"].nil?  %>
+    <%= evaluation_grouped["red"]    = 0 if evaluation_grouped["red"].nil? %>
+    <% eval_perc = {} %>
+    <% eval_perc["green"]  = evaluation_grouped["green"] %>
+    <% eval_perc["yellow"] = evaluation_grouped["yellow"] %>
+    <% eval_perc["red"]    = evaluation_grouped["red"] %>
+    <% if @evaluations.length > 0 %>
+      <% eval_perc["green"]  = eval_perc["green"]  * 100 / @evaluations.length %>
+      <% eval_perc["yellow"] = eval_perc["yellow"] * 100 / @evaluations.length %>
+      <% eval_perc["red"]    = eval_perc["red"]    * 100 / @evaluations.length %>
+    <% end %>
+
     <div class="row" style="padding-bottom:20px;">
       <div class="col-md-3">
         <img src="<%= @student.image_url%>" class="student-image center-block img-rounded">
@@ -23,9 +39,15 @@
         <p>Student statistics :</p>
         <p><%= @evaluations.length %> Evaluations</p>
         <% if @evaluations.length > 0 %>
-        <p class="bg-green"  style="padding:5px;">33.3% Green</p>
-        <p class="bg-yellow" style="padding:5px;">33.3% Yellow</p>
-        <p class="bg-red"    style="padding:5px;">33.3% Red</p>
+        <p class="bg-green"  style="padding:5px;">
+          <%= evaluation_grouped["green"] %> Evaluations, <%= eval_perc["green"].round(1) %>%
+        </p>
+        <p class="bg-yellow" style="padding:5px;">
+          <%= evaluation_grouped["yellow"] %> Evaluations, <%= eval_perc["yellow"].round(1) %>%
+        </p>
+        <p class="bg-red"    style="padding:5px;">
+          <%= evaluation_grouped["red"] %> Evaluations, <%= eval_perc["red"].round(1) %>%
+        </p>
         <% end %>
       </div>
     </div>
